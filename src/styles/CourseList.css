@@ -1,0 +1,9 @@
+.course-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 14rem);
+}
+
+.divider {
+    width: 100%;
+    border-top: 1px solid #cccccc;
+}
