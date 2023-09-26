@@ -1,6 +1,6 @@
 const Banner = ({title}) => {
     return (
-        <h1 className='m-3'>{title}</h1>
+        <h1 className='m-3 text-center'>{title}</h1>
     )
 };
 

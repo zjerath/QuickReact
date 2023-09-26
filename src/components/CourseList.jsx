@@ -1,9 +1,10 @@
 import '../styles/CourseList.css'
 
-const CourseList = ({courses}) => {
+const CourseList = ({courses, term}) => {
+    const currcourses = Object.values(courses).filter(course => course.term == term)
     return (
-        <div className='course-list m-3'>
-            {Object.entries(courses).map(([id, course]) => 
+        <div className='course-list m-3 justify-content-md-center'>
+            {Object.entries(currcourses).map(([id, course]) => 
                 <div className='card m-1 p-2' key={id}>
                     <div className='card-body'>
                         <h5 className='card-title'>{course.term} CS {course.number}</h5>
