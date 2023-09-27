@@ -2,7 +2,7 @@ const TermSelector = ({selectedTerm, setSelectedTerm}) => {
     return (
         <div className='text-center'>
             <div className="btn-group">
-                <input type="radio" className="btn-check" id="Fall" autocomplete="off" checked={selectedTerm == 'Fall'} onClick={() => setSelectedTerm('Fall')} />
+                <input type="radio" className="btn-check" id="Fall" autoComplete="off" checked={selectedTerm == 'Fall'} onChange={() => setSelectedTerm('Fall')} />
                 <label 
                     className="btn btn-outline-secondary" 
                     style={{
@@ -13,7 +13,7 @@ const TermSelector = ({selectedTerm, setSelectedTerm}) => {
                         Fall
                 </label>
 
-                <input type="radio" className="btn-check" id="Winter" autocomplete="off" checked={selectedTerm == 'Winter'} onClick={() => setSelectedTerm('Winter')} />
+                <input type="radio" className="btn-check" id="Winter" autoComplete="off" checked={selectedTerm == 'Winter'} onChange={() => setSelectedTerm('Winter')} />
                 <label 
                     className="btn btn-outline-secondary" 
                     style={{
@@ -24,7 +24,7 @@ const TermSelector = ({selectedTerm, setSelectedTerm}) => {
                         Winter
                 </label>
 
-                <input type="radio" className="btn-check" id="Spring" autocomplete="off" checked={selectedTerm == 'Spring'} onClick={() => setSelectedTerm('Spring')} />
+                <input type="radio" className="btn-check" id="Spring" autoComplete="off" checked={selectedTerm == 'Spring'} onChange={() => setSelectedTerm('Spring')} />
                 <label 
                     className="btn btn-outline-secondary" 
                     style={{
