@@ -26,7 +26,7 @@ const queryClient = new QueryClient();
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="container">
+      <div className="bg-light">
         <Main />
       </div>
     </QueryClientProvider>

@@ -1,6 +1,6 @@
 const Banner = ({title}) => {
     return (
-        <h1 className='m-3 text-center'>{title}</h1>
+        <h2 className='p-3 text-center text-white' style={{background: 'linear-gradient(#3cacb6, #8ccead)'}}>{title}</h2>
     )
 };
 
