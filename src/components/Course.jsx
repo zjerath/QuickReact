@@ -1,8 +1,15 @@
+import { Link } from "react-router-dom";
+
 const Course = ({course, selected, toggleSelected, hasConflict}) => {
     return (
         <div className={`card m-1 p-2 ${selected.includes(course) ? 'border-success border-opacity-75 border-3' : ''} ${hasConflict ? 'border-danger border-opacity-75 border-3' : ''}`}>
             <div className='card-body'>
-                <h5 className='card-title'>{course.term} CS {course.number}</h5>
+                <div className='d-flex'>
+                    <h5 className='card-title'>{course.term} CS {course.number}</h5>
+                    <Link to={{ pathname: `/courseform/${course.term}|${course.number}|${course.title}|${course.meets}`, state: { course } }}>
+                        <i className="bi bi-pencil-square text-secondary mx-2"></i>
+                    </Link>
+                </div>
                 <p className='card-text text-secondary'>{course.title}</p>
             </div>
             <div className='card-footer bg-white'>
@@ -13,7 +20,7 @@ const Course = ({course, selected, toggleSelected, hasConflict}) => {
                         <i className="bi bi-plus-circle mr-1 "></i>
                         <p className='mb-0 mx-1'>Add</p>
                     </div>
-                  </button>
+                </button>
                 : <button className={`btn opacity-75 ${selected.includes(course) ? 'btn-danger' : 'btn-success'}`} onClick={() => toggleSelected(course)}>
                     {selected.includes(course)
                     ? <div className='d-flex'>
@@ -25,7 +32,7 @@ const Course = ({course, selected, toggleSelected, hasConflict}) => {
                         <p className='mb-0 mx-1'>Add</p>
                     </div>
                     }
-                  </button>
+                </button>
                 }
             </div>
         </div>
