@@ -1,17 +1,18 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import { useDbUpdate } from "../utilities/firebase";
 import { useFormData } from '../utilities/useFormData';
 
 const validateCourseData = (key, val) => {
     switch (key) {
-      case 'courseTerm':
+      case 'term':
         return /^(Fall|Winter|Spring)$/.test(val) ? '' : 'must be Fall, Winter, or Spring';
-      case 'courseNumber':
+      case 'number':
         return /^(\d{1,3}(-\d{1,3})?)$/.test(val) && parseInt(val) >= 100 && parseInt(val) <= 500
           ? ''
           : 'must be a number between 100 and 500';
-      case 'courseTitle':
-        return /^[A-Za-z\s]{2,}$/.test(val) ? '' : 'must be at least two characters';
-      case 'meetingTimes':
+      case 'title':
+        return /^[A-Za-z\s.,?!&()-:;']{2,}$/.test(val) ? '' : 'must be at least two characters';
+      case 'meets':
         return /^$|^\w{1,4}(?:\s\d{1,2}:\d{2}-\d{1,2}:\d{2})+$/.test(val)
           ? ''
           : 'must contain days and start-end, e.g., MWF 12:00-13:20';
@@ -31,13 +32,14 @@ const InputField = ({name, text, state, change}) => {
   );
 };
 
-const ButtonBar = () => {
+const ButtonBar = ({message}) => {
   return (
     <div className="d-flex">
       <Link to='/'>
           <button type="button" className="btn btn-outline-danger">Cancel</button>
       </Link>
-      <button type="submit" className="btn btn-primary mx-4" disabled>Submit</button>
+      <button type="submit" className="btn btn-primary mx-4">Submit</button>
+      <span className="p-2">{message}</span>
     </div>
   );
 };
@@ -45,15 +47,23 @@ const ButtonBar = () => {
 const Form = () => {
     const { courseId } = useParams();
     const [term, number, title, meets] = courseId.split('|')
-    const [state, change] = useFormData(validateCourseData, {
-        courseTerm: term,
-        courseNumber: number,
-        courseTitle: title,
-        meetingTimes: meets,
-      });
+    const dbcourse = term[0].concat(String(number))
+    const [updateData, result] = useDbUpdate(`/courses/${dbcourse}`)
+    const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const [state, change] = useFormData(validateCourseData, {
+        term: term,
+        number: number,
+        title: title,
+        meets: meets,
+    });
+
+    const handleSubmit = (evt) => {
+        evt.preventDefault();
+        if (!state.errors) {
+          updateData(state.values);
+          navigate('/');
+        }
     };
 
     return (
@@ -61,11 +71,11 @@ const Form = () => {
             <div style={{background: 'linear-gradient(#3cacb6, #8ccead)', padding: '10px', borderRadius: '10px', width: '60%'}}>
                 <form onSubmit={handleSubmit} className="p-4 bg-white" style={{borderRadius: '5px', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
                     <h3>Edit Course Info</h3>
-                    <InputField name="courseTerm" text="Course Term" state={state} change={change}/>
-                    <InputField name="courseNumber" text="Course Number" state={state} change={change}/>
-                    <InputField name="courseTitle" text="Course Title" state={state} change={change}/>
-                    <InputField name="meetingTimes" text="Meeting Time(s)" state={state} change={change}/>
-                    <ButtonBar/>
+                    <InputField name="term" text="Course Term" state={state} change={change}/>
+                    <InputField name="number" text="Course Number" state={state} change={change}/>
+                    <InputField name="title" text="Course Title" state={state} change={change}/>
+                    <InputField name="meets" text="Meeting Time(s)" state={state} change={change}/>
+                    <ButtonBar message={result?.message}/>
                 </form>
             </div>
         </div>
