@@ -12,7 +12,7 @@ const validateCourseData = (key, val) => {
       case 'courseTitle':
         return /^[A-Za-z\s]{2,}$/.test(val) ? '' : 'must be at least two characters';
       case 'meetingTimes':
-        return /^$|^\w{1,4}(?:\s\d{2}:\d{2}-\d{2}:\d{2})+$/.test(val)
+        return /^$|^\w{1,4}(?:\s\d{1,2}:\d{2}-\d{1,2}:\d{2})+$/.test(val)
           ? ''
           : 'must contain days and start-end, e.g., MWF 12:00-13:20';
       default:
