@@ -21,7 +21,7 @@ const Main = () => {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<TermPage courses={data.courses} />} />
-          <Route path='courseform/:courseId' element={<Form courses={data.courses}/>} />
+          <Route path='courseform/:courseId' element={<Form />} />
         </Routes>
       </BrowserRouter>
     </div>
