@@ -1,14 +1,17 @@
 import { Link } from "react-router-dom";
+import { useProfile } from '../utilities/profile';
 
 const Course = ({course, selected, toggleSelected, hasConflict}) => {
+    const [profile, isLoading, error] = useProfile();
     return (
         <div className={`card m-1 p-2 ${selected.includes(course) ? 'border-success border-opacity-75 border-3' : ''} ${hasConflict ? 'border-danger border-opacity-75 border-3' : ''}`}>
             <div className='card-body'>
                 <div className='d-flex'>
                     <h5 className='card-title'>{course.term} CS {course.number}</h5>
+                    {profile.isAdmin &&
                     <Link to={{ pathname: `/courseform/${course.term}|${course.number}|${course.title}|${course.meets}`, state: { course } }}>
                         <i className="bi bi-pencil-square text-secondary mx-2"></i>
-                    </Link>
+                    </Link>}
                 </div>
                 <p className='card-text text-secondary'>{course.title}</p>
             </div>

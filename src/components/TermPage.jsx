@@ -20,7 +20,7 @@ const TermPage = ({courses}) => {
             <Schedule open={open} close={closeModal} selectedTerm={selectedTerm}>
                 <CoursePlan term={selectedTerm} selected={selected} />
             </Schedule>
-            <div className='d-flex justify-content-center mt-4'>
+            <div className='d-flex justify-content-center p-3 sticky-top bg-light shadow'>
                 <TermSelector selectedTerm={selectedTerm} setSelectedTerm={setSelectedTerm} />
                 <button style={{background: 'linear-gradient(#3cacb6, #8ccead)'}} className="btn text-white mx-3" onClick={openModal}>Course Plan</button>
             </div>
