@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
-import { getDatabase, onValue, ref, update} from 'firebase/database';
+import { getDatabase, onValue, ref, update, connectDatabaseEmulator } from 'firebase/database';
 import { useCallback, useEffect, useState } from 'react';
-import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
+import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut, signInWithCredential, connectAuthEmulator } from 'firebase/auth';
 
 const firebaseConfig = {
     apiKey: "AIzaSyAobHLEHQ8qhbJQR1NAoatnIUUn-8hk7BI",
@@ -15,7 +15,20 @@ const firebaseConfig = {
 };  
 
 const firebase = initializeApp(firebaseConfig);
+const auth = getAuth(firebase);
 const database = getDatabase(firebase);
+
+if (!window.EMULATION && import.meta.env.NODE_ENV !== 'production') {
+  connectAuthEmulator(auth, "http://127.0.0.1:9099");
+  connectDatabaseEmulator(database, "127.0.0.1", 9000);
+
+  signInWithCredential(auth, GoogleAuthProvider.credential(
+    '{"sub": "3erOQPbKN9w5r7alAJScWuJz0iu2", "email": "tester@gmail.com", "displayName":"Test User", "email_verified": true}'
+  ));
+  
+  // set flag to avoid connecting twice, e.g., because of an editor hot-reload
+  window.EMULATION = true;
+}
 
 export const useDbData = (path) => {
     const [data, setData] = useState();
