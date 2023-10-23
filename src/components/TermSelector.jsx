@@ -9,7 +9,8 @@ const TermSelector = ({selectedTerm, setSelectedTerm}) => {
                         border: selectedTerm == 'Fall' ? 'none' : '',
                         background: selectedTerm == 'Fall' ? 'linear-gradient(#3cacb6, #8ccead)' : 'white'
                     }}
-                    htmlFor="Fall">
+                    htmlFor="Fall"
+                    data-cy="Fall">
                         Fall
                 </label>
 
@@ -20,7 +21,8 @@ const TermSelector = ({selectedTerm, setSelectedTerm}) => {
                         border: selectedTerm == 'Winter' ? 'none' : '',
                         background: selectedTerm == 'Winter' ? 'linear-gradient(#3cacb6, #8ccead)' : 'white'
                     }}
-                    htmlFor="Winter">
+                    htmlFor="Winter"
+                    data-cy="Winter">
                         Winter
                 </label>
 
@@ -31,7 +33,8 @@ const TermSelector = ({selectedTerm, setSelectedTerm}) => {
                         border: selectedTerm == 'Spring' ? 'none' : '',
                         background: selectedTerm == 'Spring' ? 'linear-gradient(#3cacb6, #8ccead)' : 'white'
                     }} 
-                    htmlFor="Spring">
+                    htmlFor="Spring"
+                    data-cy="Spring">
                         Spring
                 </label>
             </div>
