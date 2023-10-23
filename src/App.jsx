@@ -19,10 +19,12 @@ const Main = () => {
 
   return (
     <div>
-      <Banner title={user ? data.title : ""} />
+      {/* <Banner title={user ? data.title : ""} /> */}
+      <Banner title={data.title} />
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={user ? <TermPage courses={data.courses} /> : <Login />} />
+          {/* <Route path='/' element={user ? <TermPage courses={data.courses} /> : <Login />} /> */}
+          <Route path='/' element={<TermPage courses={data.courses} />} />
           <Route path='courseform/:courseId' element={<Form />} />
         </Routes>
       </BrowserRouter>

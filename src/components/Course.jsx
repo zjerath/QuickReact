@@ -4,7 +4,7 @@ import { useProfile } from '../utilities/profile';
 const Course = ({course, selected, toggleSelected, hasConflict}) => {
     const [profile, isLoading, error] = useProfile();
     return (
-        <div className={`card m-1 p-2 ${selected.includes(course) ? 'border-success border-opacity-75 border-3' : ''} ${hasConflict ? 'border-danger border-opacity-75 border-3' : ''}`}>
+        <div className={`card m-1 p-2 ${selected.includes(course) ? 'border-success border-opacity-75 border-3' : ''} ${hasConflict ? 'border-danger border-opacity-75 border-3' : ''}`} data-cy="course">
             <div className='card-body'>
                 <div className='d-flex'>
                     <h5 className='card-title'>{course.term} CS {course.number}</h5>
