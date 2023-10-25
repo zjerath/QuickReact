@@ -6,7 +6,7 @@ import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signO
 const firebaseConfig = {
     apiKey: "AIzaSyAobHLEHQ8qhbJQR1NAoatnIUUn-8hk7BI",
     authDomain: "quickreact-ea95e.firebaseapp.com",
-    databaseURL: "https://quickreact-ea95e-default-rtdb.firebaseio.com",
+    databaseURL: "https://quickreact-ea95e.firebaseio.com",
     projectId: "quickreact-ea95e",
     storageBucket: "quickreact-ea95e.appspot.com",
     messagingSenderId: "531452138536",
